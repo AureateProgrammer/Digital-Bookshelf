@@ -1,0 +1,23 @@
+const express = require('express');
+const cors = require('cors');
+const connectDB = require('./db/connection');
+
+const app = express();
+
+// Connect to database
+connectDB();
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+// Routes
+const authRoutes = require('./routes/auth');
+const bookRoutes = require('./routes/books');
+app.use('/api/auth', authRoutes);
+app.use('/api/books', bookRoutes);
+
+// Start the server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
