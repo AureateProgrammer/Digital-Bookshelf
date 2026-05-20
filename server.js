@@ -1,5 +1,4 @@
 const express = require('express');
-const cors = require('cors');
 const connectDB = require('./db/connection');
 
 const app = express();
@@ -8,7 +7,6 @@ const app = express();
 connectDB();
 
 // Middleware
-app.use(cors());
 app.use(express.json());
 // Routes
 const authRoutes = require('./routes/auth');
