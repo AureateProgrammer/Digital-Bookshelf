@@ -3,6 +3,7 @@ const Book = require('../models/book');
 
 const router = express.Router();
 
+// Get the full bookshelf.
 router.get('/', async (req, res) => {
 	try {
 		const books = await Book.find();
@@ -12,10 +13,12 @@ router.get('/', async (req, res) => {
 	}
 });
 
+// Grab one book by its id.
 router.get('/:id', async (req, res) => {
 	try {
 		const book = await Book.findById(req.params.id);
 		if (!book) {
+			// Keep the response clear when nothing matches that id.
 			return res.status(404).json({ message: 'Book not found' });
 		}
 
@@ -25,6 +28,7 @@ router.get('/:id', async (req, res) => {
 	}
 });
 
+// Add a new book from the request body.
 router.post('/', async (req, res) => {
 	try {
 		const book = await Book.create(req.body);
@@ -34,6 +38,7 @@ router.post('/', async (req, res) => {
 	}
 });
 
+// Update whichever fields come in for a specific book.
 router.put('/:id', async (req, res) => {
 	try {
 		const updatedBook = await Book.findByIdAndUpdate(req.params.id, req.body, {
@@ -51,6 +56,7 @@ router.put('/:id', async (req, res) => {
 	}
 });
 
+// Remove a book permanently by id.
 router.delete('/:id', async (req, res) => {
 	try {
 		const deletedBook = await Book.findByIdAndDelete(req.params.id);
