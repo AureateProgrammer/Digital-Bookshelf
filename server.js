@@ -9,9 +9,7 @@ connectDB();
 // Middleware
 app.use(express.json());
 // Routes
-const authRoutes = require('./routes/auth');
-const bookRoutes = require('./routes/books');
-app.use('/api/auth', authRoutes);
+const bookRoutes = require('./routes/bookRoutes');
 app.use('/api/books', bookRoutes);
 
 // Start the server
